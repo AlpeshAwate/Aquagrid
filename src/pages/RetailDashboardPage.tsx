@@ -43,29 +43,73 @@ const RetailDashboardPage: React.FC = () => {
             Live System Status
           </div>
 
-          {/* Simple Animated 2D Diagram */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-8">
-            {/* House / Tank */}
-            <div className="w-32 h-24 bg-white dark:bg-slate-700 rounded-t-xl border-t-4 border-slate-300 dark:border-slate-600 relative flex items-center justify-center shadow-lg z-10">
-              <span className="text-slate-400 dark:text-slate-500 font-bold text-xs uppercase tracking-wider">Pressure Tank</span>
-            </div>
+          {/* Elaborate Animated 2D Diagram - Full House Cross-Section */}
+          <div className="absolute inset-0 flex items-end justify-center pb-6 px-4">
             
-            {/* Pipe */}
-            <div className="w-4 h-32 bg-sky-300 dark:bg-sky-800 relative z-0">
-               {pumpSpin && (
-                 <div className="absolute inset-0 bg-sky-400 dark:bg-sky-600 animate-pulse"></div>
-               )}
-            </div>
+            {/* Ground / Sub-surface divider */}
+            <div className="absolute bottom-0 inset-x-0 h-32 bg-amber-900/10 dark:bg-amber-900/20 border-t-2 border-amber-800/20 dark:border-amber-700/30 border-dashed z-0"></div>
 
-            {/* Well & Pump */}
-            <div className="relative">
-              <div className="w-16 h-24 bg-slate-800 dark:bg-slate-950 rounded-b-xl border-x-4 border-b-4 border-slate-600 dark:border-slate-800 flex flex-col items-center justify-center p-2 z-10">
-                <div className={`w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center ${pumpSpin ? 'animate-spin' : ''}`}>
-                   <Droplets className="w-4 h-4 text-white" />
+            <div className="relative w-full max-w-2xl h-64 flex items-end justify-between z-10">
+              
+              {/* LEFT: Deep Well (FPS Pump & Motor) + SubDrive */}
+              <div className="flex flex-col items-center relative h-full justify-end">
+                {/* Surface Wall / Controller */}
+                <div className="absolute top-8 -left-4 flex flex-col items-center">
+                  <div className="w-10 h-14 bg-slate-800 dark:bg-slate-900 rounded-md border border-slate-600 shadow-lg flex items-center justify-center relative">
+                    <div className={`w-2 h-2 rounded-full ${pumpSpin ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-slate-500'}`}></div>
+                  </div>
+                  <span className="text-[9px] font-bold text-slate-700 dark:text-slate-300 mt-1 uppercase tracking-tighter text-center">SubDrive<br/>Connect</span>
                 </div>
-                <span className="text-white text-[10px] mt-2 font-bold uppercase tracking-wider text-center leading-tight">SubDrive<br/>Connect</span>
+
+                {/* Well Pipe */}
+                <div className="w-3 h-48 bg-sky-200 dark:bg-sky-900/50 border-x border-sky-300 dark:border-sky-700 relative overflow-hidden">
+                  {pumpSpin && <div className="absolute inset-0 bg-sky-400 dark:bg-sky-500 animate-pulse opacity-75"></div>}
+                </div>
+                
+                {/* FPS Submersible Pump & Motor */}
+                <div className="w-7 h-20 bg-slate-700 dark:bg-slate-800 rounded-b-lg border-x-2 border-b-2 border-slate-600 flex flex-col items-center justify-between p-1">
+                  <div className={`w-3 h-3 text-sky-300 ${pumpSpin ? 'animate-spin' : ''}`}><Wrench className="w-full h-full" /></div>
+                  <div className="w-full h-6 bg-slate-800 dark:bg-slate-950 rounded-sm mt-1 border-t border-slate-600"></div>
+                </div>
+                <span className="absolute -bottom-5 text-[9px] font-bold text-amber-800 dark:text-amber-500 uppercase tracking-tighter text-center whitespace-nowrap">FPS Series V<br/>& Motor</span>
               </div>
-              <div className="absolute -inset-8 bg-sky-200/50 dark:bg-sky-900/20 rounded-full blur-2xl -z-10"></div>
+
+              {/* Horizontal Connecting Pipe (Ground Level) */}
+              <div className="absolute left-[30px] bottom-[108px] right-[55%] h-3 bg-sky-200 dark:bg-sky-900/50 border-y border-sky-300 dark:border-sky-700 overflow-hidden">
+                {pumpSpin && <div className="absolute inset-0 bg-sky-400 dark:bg-sky-500 animate-pulse opacity-75"></div>}
+              </div>
+
+              {/* MIDDLE: House / Water Treatment (Puronics) */}
+              <div className="flex flex-col items-center absolute left-[45%] bottom-[108px]">
+                <div className="w-24 h-32 bg-white dark:bg-slate-800 rounded-t-xl border-x-2 border-t-2 border-slate-300 dark:border-slate-600 shadow-xl flex flex-col items-center justify-end p-2 relative">
+                  
+                  {/* Puronics Softener Tanks */}
+                  <div className="flex gap-2 items-end">
+                    <div className="w-6 h-20 bg-blue-100 dark:bg-blue-900/40 rounded-full border border-blue-300 dark:border-blue-700"></div>
+                    <div className="w-8 h-16 bg-slate-100 dark:bg-slate-700 rounded-md border border-slate-300 dark:border-slate-600 relative overflow-hidden">
+                      <div className="absolute bottom-0 inset-x-0 bg-white dark:bg-slate-300 h-1/5 opacity-50"></div> {/* Salt level */}
+                    </div>
+                  </div>
+                  <span className="text-[9px] font-bold text-blue-700 dark:text-blue-400 mt-2 uppercase tracking-tighter">Puronics</span>
+                </div>
+              </div>
+
+              {/* Horizontal Connecting Pipe (House to Drain) */}
+              <div className="absolute left-[45%] bottom-[80px] right-[10%] h-2 bg-slate-300 dark:bg-slate-700 border-y border-slate-400 dark:border-slate-600"></div>
+
+              {/* RIGHT: Gray Water / Grinder Sump (Little Giant) */}
+              <div className="flex flex-col items-center absolute right-[5%] bottom-[40px]">
+                <div className="w-16 h-16 bg-slate-200 dark:bg-slate-800/80 rounded-b-xl border-x-2 border-b-2 border-slate-400 dark:border-slate-600 border-t border-dashed relative flex items-end justify-center p-1">
+                  <div className="absolute top-2 right-2 text-slate-400"><Droplets className="w-3 h-3" /></div>
+                  {/* Little Giant Pump */}
+                  <div className="w-8 h-10 bg-indigo-600 dark:bg-indigo-700 rounded-t-md border-b-4 border-slate-800 flex items-center justify-center relative">
+                    <div className="w-1 h-6 bg-slate-300 absolute -top-6"></div> {/* Float switch/pipe */}
+                    <span className="text-[8px] font-bold text-white uppercase">LG</span>
+                  </div>
+                </div>
+                <span className="absolute -bottom-5 text-[9px] font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-tighter text-center whitespace-nowrap">Little Giant<br/>Sump/Grinder</span>
+              </div>
+
             </div>
           </div>
           
