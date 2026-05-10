@@ -42,6 +42,13 @@ const LoginPage: React.FC = () => {
           email: 'viewer@aquagrid.com',
           role: 'viewer'
         })
+      } else if (email === 'homeowner@aquagrid.com' && password === 'home123') {
+        login({
+          id: '4',
+          name: 'John Doe',
+          email: 'homeowner@aquagrid.com',
+          role: 'homeowner'
+        })
       } else {
         throw new Error('Invalid credentials')
       }
@@ -148,6 +155,7 @@ const LoginPage: React.FC = () => {
               <div><strong>Admin:</strong> admin@aquagrid.com / admin123</div>
               <div><strong>Operator:</strong> operator@aquagrid.com / operator123</div>
               <div><strong>Viewer:</strong> viewer@aquagrid.com / viewer123</div>
+              <div><strong>Homeowner:</strong> homeowner@aquagrid.com / home123</div>
             </div>
           </div>
         </div>

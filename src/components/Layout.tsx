@@ -26,7 +26,8 @@ import {
   Sun,
   Moon,
   LogOut,
-  FileText
+  FileText,
+  Home
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { useThemeStore } from '@/stores/themeStore'
@@ -45,11 +46,19 @@ const navigation = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
+const retailNavigation = [
+  { name: 'My Home', href: '/retail-dashboard', icon: Home },
+  { name: 'Marketplace', href: '/marketplace', icon: ShoppingCart },
+  { name: 'Settings', href: '/settings', icon: Settings },
+]
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false)
   const location = useLocation()
   const { user, logout } = useAuthStore()
   const { theme, toggleTheme } = useThemeStore()
+
+  const currentNavigation = user?.role === 'homeowner' ? retailNavigation : navigation
 
   const handleLogout = () => {
     logout()
@@ -72,20 +81,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="h-16 flex items-center px-6 border-b border-slate-800">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-900/50">
                 <Droplets className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h1 className="font-bold text-white text-lg tracking-tight">AQUAGRID</h1>
-                <p className="text-[10px] text-blue-400 font-semibold tracking-wider">ENTERPRISE</p>
+                <p className="text-[10px] text-blue-400 font-semibold tracking-wider">
+                  {user?.role === 'homeowner' ? 'HOME' : 'ENTERPRISE'}
+                </p>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* Navigation */}
           <nav className="flex-1 py-6 px-3 space-y-1">
-            {navigation.map((item) => {
+            {currentNavigation.map((item) => {
               const isActive = location.pathname === item.href
               return (
                 <Link
@@ -144,7 +155,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">Production</span>
               <span className="text-slate-300 dark:text-slate-600">/</span>
               <span className="font-semibold text-slate-800 dark:text-slate-200">
-                {navigation.find(item => item.href === location.pathname)?.name || 'Dashboard'}
+                {currentNavigation.find(item => item.href === location.pathname)?.name || 'Dashboard'}
               </span>
             </div>
           </div>

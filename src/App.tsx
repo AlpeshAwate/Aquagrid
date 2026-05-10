@@ -11,6 +11,7 @@ import BusinessCasePage from '@/pages/BusinessCasePage'
 const LoginPage = lazy(() => import('@/pages/LoginPage'))
 const GlobalTwinPage = lazy(() => import('@/pages/GlobalTwinPage'))
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
+const RetailDashboardPage = lazy(() => import('@/pages/RetailDashboardPage'))
 const AssetsPage = lazy(() => import('@/pages/AssetsPage'))
 const DigitalTwinPage = lazy(() => import('@/pages/DigitalTwinPage'))
 const MarketplacePage = lazy(() => import('@/pages/MarketplacePage'))
@@ -19,7 +20,7 @@ const CompliancePage = lazy(() => import('@/pages/CompliancePage'))
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'))
 
 function App() {
-  const { isAuthenticated } = useAuthStore()
+  const { isAuthenticated, user } = useAuthStore()
   const { resolvedTheme } = useThemeStore()
 
   // Apply theme to document
@@ -33,7 +34,16 @@ function App() {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors">
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<PublicPage />} />
+          <Route 
+            path="/" 
+            element={
+              isAuthenticated ? (
+                <Navigate to={user?.role === 'homeowner' ? '/retail-dashboard' : '/dashboard'} replace />
+              ) : (
+                <PublicPage />
+              )
+            } 
+          />
           <Route path="/business-case" element={<BusinessCasePage />} />
           <Route
             path="/global-twin"
@@ -47,7 +57,7 @@ function App() {
             path="/login"
             element={
               isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
+                <Navigate to={user?.role === 'homeowner' ? '/retail-dashboard' : '/dashboard'} replace />
               ) : (
                 <Suspense fallback={<LoadingSpinner className="min-h-screen" />}>
                   <LoginPage />
@@ -65,6 +75,7 @@ function App() {
                   <Suspense fallback={<LoadingSpinner />}>
                     <Routes>
                       <Route path="/dashboard" element={<DashboardPage />} />
+                      <Route path="/retail-dashboard" element={<RetailDashboardPage />} />
                       <Route path="/assets" element={<AssetsPage />} />
                       <Route path="/digital-twin" element={<DigitalTwinPage />} />
                       <Route path="/marketplace" element={<MarketplacePage />} />
