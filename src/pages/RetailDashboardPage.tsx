@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Droplets, Battery, Wrench, ShieldCheck, Activity, AlertTriangle, ArrowRight, Home as HomeIcon, CircleDollarSign, CloudRain } from 'lucide-react'
+import AquaGridHome3D from '../components/AquaGridHome3D'
 
 const RetailDashboardPage: React.FC = () => {
   const [pumpSpin, setPumpSpin] = useState(false)
@@ -33,143 +34,8 @@ const RetailDashboardPage: React.FC = () => {
       </div>
 
       {/* Main Home Loop Vis & Battery */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        {/* The "Home Water Loop" 2D Visualization */}
-        <div className="lg:col-span-2 bg-gradient-to-b from-sky-50 to-sky-100 dark:from-slate-800 dark:to-slate-900 rounded-2xl border border-sky-200 dark:border-slate-700 shadow-sm overflow-hidden relative min-h-[320px]">
-          
-          <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur px-3 py-1.5 rounded-full text-xs font-bold text-sky-700 dark:text-sky-300 shadow-sm border border-sky-200/50 dark:border-slate-700">
-            <Activity className="w-4 h-4" />
-            Live System Status
-          </div>
-
-          {/* Elaborate Animated 2D Diagram - Full House Cross-Section */}
-          <div className="absolute inset-0 flex items-end justify-center pb-6 px-4">
-            
-            {/* Ground / Sub-surface divider */}
-            <div className="absolute bottom-0 inset-x-0 h-32 bg-amber-900/10 dark:bg-amber-900/20 border-t-2 border-amber-800/20 dark:border-amber-700/30 border-dashed z-0"></div>
-
-            <div className="relative w-full max-w-2xl h-64 flex items-end justify-between z-10">
-              
-              {/* LEFT: Deep Well (FPS Pump & Motor) + SubDrive */}
-              <div className="flex flex-col items-center relative h-full justify-end">
-                {/* Surface Wall / Controller */}
-                <div className="absolute top-8 -left-4 flex flex-col items-center">
-                  <div className="w-10 h-14 bg-slate-800 dark:bg-slate-900 rounded-md border border-slate-600 shadow-lg flex items-center justify-center relative">
-                    <div className={`w-2 h-2 rounded-full ${pumpSpin ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-slate-500'}`}></div>
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-700 dark:text-slate-300 mt-1 uppercase tracking-tighter text-center">SubDrive<br/>Connect</span>
-                </div>
-
-                {/* Well Pipe */}
-                <div className="w-3 h-48 bg-sky-200 dark:bg-sky-900/50 border-x border-sky-300 dark:border-sky-700 relative overflow-hidden">
-                  {pumpSpin && <div className="absolute inset-0 bg-sky-400 dark:bg-sky-500 animate-pulse opacity-75"></div>}
-                </div>
-                
-                {/* FPS Submersible Pump & Motor */}
-                <div className="w-7 h-20 bg-slate-700 dark:bg-slate-800 rounded-b-lg border-x-2 border-b-2 border-slate-600 flex flex-col items-center justify-between p-1">
-                  <div className={`w-3 h-3 text-sky-300 ${pumpSpin ? 'animate-spin' : ''}`}><Wrench className="w-full h-full" /></div>
-                  <div className="w-full h-6 bg-slate-800 dark:bg-slate-950 rounded-sm mt-1 border-t border-slate-600"></div>
-                </div>
-                <span className="absolute -bottom-5 text-[9px] font-bold text-amber-800 dark:text-amber-500 uppercase tracking-tighter text-center whitespace-nowrap">FPS Series V<br/>& Motor</span>
-              </div>
-
-              {/* Horizontal Connecting Pipe (Ground Level) */}
-              <div className="absolute left-[30px] bottom-[108px] right-[55%] h-3 bg-sky-200 dark:bg-sky-900/50 border-y border-sky-300 dark:border-sky-700 overflow-hidden">
-                {pumpSpin && <div className="absolute inset-0 bg-sky-400 dark:bg-sky-500 animate-pulse opacity-75"></div>}
-              </div>
-
-              {/* MIDDLE: House / Water Treatment (Puronics) */}
-              <div className="flex flex-col items-center absolute left-[45%] bottom-[108px]">
-                <div className="w-24 h-32 bg-white dark:bg-slate-800 rounded-t-xl border-x-2 border-t-2 border-slate-300 dark:border-slate-600 shadow-xl flex flex-col items-center justify-end p-2 relative">
-                  
-                  {/* Puronics Softener Tanks */}
-                  <div className="flex gap-2 items-end">
-                    <div className="w-6 h-20 bg-blue-100 dark:bg-blue-900/40 rounded-full border border-blue-300 dark:border-blue-700"></div>
-                    <div className="w-8 h-16 bg-slate-100 dark:bg-slate-700 rounded-md border border-slate-300 dark:border-slate-600 relative overflow-hidden">
-                      <div className="absolute bottom-0 inset-x-0 bg-white dark:bg-slate-300 h-1/5 opacity-50"></div> {/* Salt level */}
-                    </div>
-                  </div>
-                  <span className="text-[9px] font-bold text-blue-700 dark:text-blue-400 mt-2 uppercase tracking-tighter">Puronics</span>
-                </div>
-              </div>
-
-              {/* Horizontal Connecting Pipe (House to Drain) */}
-              <div className="absolute left-[45%] bottom-[80px] right-[10%] h-2 bg-slate-300 dark:bg-slate-700 border-y border-slate-400 dark:border-slate-600"></div>
-
-              {/* RIGHT: Gray Water / Grinder Sump (Little Giant) */}
-              <div className="flex flex-col items-center absolute right-[5%] bottom-[40px]">
-                <div className="w-16 h-16 bg-slate-200 dark:bg-slate-800/80 rounded-b-xl border-x-2 border-b-2 border-slate-400 dark:border-slate-600 border-t border-dashed relative flex items-end justify-center p-1">
-                  <div className="absolute top-2 right-2 text-slate-400"><Droplets className="w-3 h-3" /></div>
-                  {/* Little Giant Pump */}
-                  <div className="w-8 h-10 bg-indigo-600 dark:bg-indigo-700 rounded-t-md border-b-4 border-slate-800 flex items-center justify-center relative">
-                    <div className="w-1 h-6 bg-slate-300 absolute -top-6"></div> {/* Float switch/pipe */}
-                    <span className="text-[8px] font-bold text-white uppercase">LG</span>
-                  </div>
-                </div>
-                <span className="absolute -bottom-5 text-[9px] font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-tighter text-center whitespace-nowrap">Little Giant<br/>Sump/Grinder</span>
-              </div>
-
-            </div>
-          </div>
-          
-          <div className="absolute bottom-4 right-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur p-3 rounded-xl border border-sky-100 dark:border-slate-700 shadow-sm text-right">
-             <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Current Flow</p>
-             <p className="text-xl font-bold text-sky-600 dark:text-sky-400">{pumpSpin ? '12.4' : '0.0'} <span className="text-sm">GPM</span></p>
-          </div>
-        </div>
-
-        {/* Connected Ecosystem */}
-        <div className="flex flex-col gap-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 flex-1 relative overflow-hidden">
-             <div className="absolute top-0 inset-x-0 h-1 bg-blue-500"></div>
-             <h3 className="font-bold text-slate-900 dark:text-white mb-4">Connected Ecosystem</h3>
-             
-             <div className="space-y-3">
-               <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
-                 <div>
-                   <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">FPS Series V</p>
-                   <p className="text-sm font-semibold text-slate-900 dark:text-white">Well Pump</p>
-                 </div>
-                 <div className="text-right">
-                   <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">88% Health</p>
-                   <p className="text-[10px] text-slate-500">Est. 6.5 Yrs Left</p>
-                 </div>
-               </div>
-
-               <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
-                 <div>
-                   <p className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">SubDrive Connect</p>
-                   <p className="text-sm font-semibold text-slate-900 dark:text-white">Smart Controller</p>
-                 </div>
-                 <div className="flex items-center gap-1.5">
-                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                   <p className="text-xs font-bold text-slate-700 dark:text-slate-300">Online</p>
-                 </div>
-               </div>
-
-               <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700/50">
-                 <div>
-                   <p className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Little Giant</p>
-                   <p className="text-sm font-semibold text-slate-900 dark:text-white">Basement Sump Pump</p>
-                 </div>
-                 <p className="text-xs font-bold text-slate-500">Standby</p>
-               </div>
-
-               <div className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-900/10 rounded-xl border border-amber-100 dark:border-amber-800/30">
-                 <div>
-                   <p className="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-wider">Puronics</p>
-                   <p className="text-sm font-semibold text-slate-900 dark:text-white">Water Softener</p>
-                 </div>
-                 <div className="text-right">
-                   <p className="text-sm font-bold text-amber-600 dark:text-amber-500">20% Salt</p>
-                   <p className="text-[10px] text-amber-700/70 dark:text-amber-400/70">Refill soon</p>
-                 </div>
-               </div>
-             </div>
-          </div>
-        </div>
-
+      <div className="w-full mb-8">
+        <AquaGridHome3D />
       </div>
 
       {/* Consumption & Insights Grid */}

@@ -31,6 +31,7 @@ import {
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { useThemeStore } from '@/stores/themeStore'
+import AquaGridLogo from './AquaGridLogo'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -82,9 +83,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Logo */}
           <div className="h-16 flex items-center px-6 border-b border-slate-800">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-900/50">
-                <Droplets className="w-5 h-5 text-white" />
-              </div>
+              <AquaGridLogo className="w-8 h-8 drop-shadow-lg" />
               <div>
                 <h1 className="font-bold text-white text-lg tracking-tight">AQUAGRID</h1>
                 <p className="text-[10px] text-blue-400 font-semibold tracking-wider">

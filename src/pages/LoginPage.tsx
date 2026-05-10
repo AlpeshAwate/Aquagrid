@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Droplets, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
+import AquaGridLogo from '../components/AquaGridLogo'
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -64,9 +65,7 @@ const LoginPage: React.FC = () => {
       <div className="max-w-md w-full space-y-8">
         {/* Logo */}
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25">
-            <Droplets className="h-8 w-8 text-white" />
-          </div>
+          <AquaGridLogo className="mx-auto h-16 w-16 drop-shadow-lg" />
           <h2 className="mt-6 text-3xl font-bold text-slate-900 dark:text-white">
             Welcome to AquaGrid
           </h2>

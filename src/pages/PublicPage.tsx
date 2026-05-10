@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AquaGridLogo from '../components/AquaGridLogo';
 import {
   Search, Droplets, Map, Activity,
   Menu, X, ChevronRight, AlertTriangle,
@@ -111,9 +112,7 @@ const PublicPage: React.FC = () => {
       {/* HEADER */}
       <nav className="fixed top-0 w-full z-40 px-4 md:px-8 py-4 flex justify-between items-center bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm transition-all">
         <div className="flex items-center gap-4">
-          <div className="h-10 w-10 bg-gradient-to-tr from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <Droplets size={22} className="text-white fill-white" />
-          </div>
+          <AquaGridLogo className="w-10 h-10 drop-shadow-lg" />
           <div>
             <span className="text-xl font-bold tracking-tight block leading-none text-slate-900">Aqua<span className="text-blue-600">Grid</span></span>
             <span className="text-[10px] text-slate-500 tracking-wider font-mono uppercase flex items-center gap-1">

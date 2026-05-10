@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Droplets, ArrowLeft, Target, Server, ShieldCheck, Zap, Globe, Cpu, Lock, Network, Banknote } from 'lucide-react'
+import AquaGridLogo from '../components/AquaGridLogo'
 
 const BusinessCasePage: React.FC = () => {
   return (
@@ -16,9 +17,7 @@ const BusinessCasePage: React.FC = () => {
       <nav className="fixed top-0 w-full z-40 px-4 md:px-8 py-4 flex justify-between items-center bg-white/70 backdrop-blur-xl border-b border-white/50 shadow-sm">
         <div className="flex items-center gap-4">
           <Link to="/" className="flex items-center gap-3">
-            <div className="h-10 w-10 bg-gradient-to-tr from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <Droplets size={22} className="text-white fill-white" />
-            </div>
+            <AquaGridLogo className="w-10 h-10 drop-shadow-lg" />
             <div>
               <span className="text-xl font-bold tracking-tight block leading-none text-slate-900">Aqua<span className="text-blue-600">Grid</span></span>
               <span className="text-[10px] text-slate-500 tracking-wider font-mono uppercase">Global OS</span>

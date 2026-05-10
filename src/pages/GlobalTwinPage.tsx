@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Activity, Calendar, CloudRain, Database, Droplets, Gauge, Layers3, Waves } from 'lucide-react'
 import groundwaterService from '@/services/groundwater'
+import AquaGridLogo from '../components/AquaGridLogo'
 import { useDataStore } from '@/stores/dataStore'
 import type { GroundwaterBasin, GroundwaterSelection, GroundwaterSnapshot } from '@/types'
 import {
@@ -126,9 +127,7 @@ const GlobalTwinPage: React.FC = () => {
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/85 px-4 py-3 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/85 md:px-8">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 shadow-lg shadow-blue-500/20">
-              <Droplets className="h-5 w-5 text-white" />
-            </div>
+            <AquaGridLogo className="w-9 h-9 drop-shadow-lg" />
             <div>
               <span className="block text-lg font-bold leading-none text-slate-900 dark:text-white">
                 Aqua<span className="text-blue-600">Grid</span>
