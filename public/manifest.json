@@ -1,0 +1,20 @@
+{
+  "name": "AquaGrid - Water Intelligence Platform",
+  "short_name": "AquaGrid",
+  "description": "Unified Water Intelligence for Global",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0EA5E9",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "screenshots": []
+}
